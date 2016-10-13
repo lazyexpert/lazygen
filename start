@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# LOL magic syntax to pass all arguments
+./main.py "$@"
