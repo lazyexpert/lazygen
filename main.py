@@ -12,11 +12,12 @@ def printHelp():
     print "./main.py [-l number] || [--length number] [-s string] || [--symbols string]"
     
     print "\nOptions:"
-    print "\t-l NUMBER or --length NUMBER - required, the length of the password, integer"
+    print "\t-l NUMBER or --length NUMBER - required, the max length of the password, integer"
     print "\t-s STRING or --symbols STRING - optional, symbols set, default(ascii) might be used"
 
+    # TODO: think of pipe here ...
     print "\nPro usage :D :"
-    print "./start -l NUMBER > dict_NUMBER.txt"
+    print "./start -l NUMBER > dict.txt"
 
 # Find target argument and return its value
 def findValue(arg, arg2):
@@ -27,17 +28,19 @@ def findValue(arg, arg2):
 
 # Parse arguments
 def parseArgs():
-    length = findValue('-l', '--length')
+    length = int (findValue('-l', '--length'))
     symbols = findValue('-s', '--symbols')
     if len(symbols) == 0:
         symbols = DEFAULT_SYMBOLS
-    generate( symbols, int(length) )
+    while length != 3:
+        generate(symbols, length)
+        length = length -1
 
 # Generate password list
-def generate(symbols, length):
+def generate(symbols, length):    
     res = itertools.product(symbols, repeat=length)
     for i in res: 
-        print ''.join(i)
+        print ''.join(i)    
 
 # Main function
 def main():
